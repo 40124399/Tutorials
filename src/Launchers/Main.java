@@ -46,12 +46,12 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = "";
-                for(int i = 0; i < 10; i++) {
-                    s += ","+((int)(Math.random()*230));
+                for (int i = 0; i < 10; i++) {
+                    s += "," + ((int) (Math.random() * 230));
                 }
 
                 System.out.println(s);
-                s = s.replaceFirst(",","");
+                s = s.replaceFirst(",", "");
 
                 drawPanel(s);
             }
@@ -64,18 +64,14 @@ public class Main extends JFrame {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                resizeComponent(button, textField);
-
-                panel.setBounds(panel.getX(), panel.getY(), getContentPane().getWidth() - (panel.getX() * 2), getContentPane().getHeight() - panel.getY() - 10);
-
-                resizeComponent(button);
+                resize();
             }
         });
 
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!toggle) {
+                if (!toggle) {
                     timer.start();
                     toggle = true;
                     button.setBackground(Color.RED);
@@ -88,6 +84,8 @@ public class Main extends JFrame {
                 }
             }
         });
+
+        resize();
     }
 
     private void drawPanel(String s) {
@@ -108,8 +106,8 @@ public class Main extends JFrame {
             }
 
             for (int i = 0; i < graph.length; i++) {
-                graphics.setColor(new Color((int)(Math.random() * 250), (int)(Math.random() * 250), (int)(Math.random() * 250)));
-                graphics.drawLine(graph[i],graph[i],((int)(Math.random()*200)),((int)(Math.random()*200)));
+                graphics.setColor(new Color((int) (Math.random() * 250), (int) (Math.random() * 250), (int) (Math.random() * 250)));
+                graphics.drawLine(graph[i], graph[i], ((int) (Math.random() * 200)), ((int) (Math.random() * 200)));
             }
 
         } catch (Exception e) {
@@ -120,6 +118,14 @@ public class Main extends JFrame {
 
         graphics.dispose();
 
+    }
+
+    private void resize () {
+        resizeComponent(button, textField);
+
+        panel.setBounds(panel.getX(), panel.getY(), getContentPane().getWidth() - (panel.getX() * 2), getContentPane().getHeight() - panel.getY() - 10);
+
+        resizeComponent(button);
     }
 
     private void resizeComponent(Component... component) {
